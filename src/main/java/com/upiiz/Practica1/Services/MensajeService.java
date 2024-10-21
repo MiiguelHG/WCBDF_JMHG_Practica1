@@ -17,26 +17,29 @@ public class MensajeService {
 
     //GET
     public List<Mensaje> getAllMensajes(){
-        return mensajeRepository.obtenerTodosLosMensajes();
+        return mensajeRepository.findAll();
     }
 
     //GET by Id
-    public Mensaje getMensajeById(Long id){
-        return mensajeRepository.obtenerMensajePorId(id);
+    public Mensaje getMensajeById(String id){
+        return mensajeRepository.findById(id).orElse(null);
     }
 
     //POST
     public Mensaje save(Mensaje mensaje){
-        return mensajeRepository.guardar(mensaje);
+        return mensajeRepository.save(mensaje);
     }
 
     //PUT
     public Mensaje update(Mensaje mensaje){
-        return mensajeRepository.actualizar(mensaje);
+        if(mensajeRepository.findById(mensaje.getId()).orElse(null) != null){
+            return mensajeRepository.save(mensaje);
+        }
+        return null;
     }
 
     //DELETE
-    public void delete(Long id){
-        mensajeRepository.eliminar(id);
+    public void delete(String id){
+        mensajeRepository.deleteById(id);
     }
 }

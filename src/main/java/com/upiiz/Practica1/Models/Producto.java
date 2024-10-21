@@ -1,7 +1,12 @@
 package com.upiiz.Practica1.Models;
 
+import jakarta.persistence.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "productos")
 public class Producto {
-    private Long id;
+    @Id
+    private String id;
     private String nombre;
     private Double precio;
     private Integer cantidad;
@@ -15,7 +20,7 @@ public class Producto {
     }
 
     // Constructor con todas las variables
-    public Producto(Long id, String nombre, Double precio, Integer cantidad, String recomendacion, String imagen, String categoria, Boolean visible) {
+    public Producto(String id, String nombre, Double precio, Integer cantidad, String recomendacion, String imagen, String categoria, Boolean visible) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -27,11 +32,11 @@ public class Producto {
     }
 
     // Getters and Setters
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

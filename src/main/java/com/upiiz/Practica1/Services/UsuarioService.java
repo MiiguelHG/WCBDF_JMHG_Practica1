@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class UsuarioService {
     //Requiero inyectar el repositorio
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
     //Constructor - Cuando crear la instanica le pasa el repositorio
     public UsuarioService(UsuarioRepository usuarioRepository){
@@ -18,12 +18,12 @@ public class UsuarioService {
 
     //GET
     public List<Usuario> getAllUsuarios (){
-        return usuarioRepository.getUsuarios();
+        return usuarioRepository.findAll();
     }
 
     //GET by Id
-    public Usuario getUsuarioById(Long id){
-        return usuarioRepository.getUsuarioById(id);
+    public Usuario getUsuarioById(String id){
+        return usuarioRepository.findById(id).orElse(null);
     }
 
     //POST
@@ -33,10 +33,13 @@ public class UsuarioService {
 
     //PUT
     public Usuario update(Usuario usuario){
-        return usuarioRepository.update(usuario);
+        if (usuarioRepository.findById(usuario.getId()).orElse(null) != null){
+            return usuarioRepository.save(usuario);
+        }
+        return null;
     }
     //DELETE
-    public void delete(Long id){
-        usuarioRepository.delete(id);
+    public void delete(String id){
+        usuarioRepository.deleteById(id);
     }
 }

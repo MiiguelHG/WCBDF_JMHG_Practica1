@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class PedidoService {
     //Requiero inyectar el repositorio
-    PedidoRepository pedidoRepository;
+    private final PedidoRepository pedidoRepository;
 
     //Constructor - Cuando crear la instanica le pasa el repositorio
     public PedidoService(PedidoRepository pedidoRepository){
@@ -18,26 +18,29 @@ public class PedidoService {
 
     //GET
     public List<Pedido> getAllPedidos (){
-        return pedidoRepository.getPedidos();
+        return pedidoRepository.findAll();
     }
 
     //GET by Id
-    public Pedido getPedidoById(Long id){
-        return pedidoRepository.obtenerPedidoPorId(id);
+    public Pedido getPedidoById(String id){
+        return pedidoRepository.findById(id).orElse(null);
     }
 
     //POST
     public Pedido save(Pedido pedido){
-        return pedidoRepository.guardar(pedido);
+        return pedidoRepository.save(pedido);
     }
 
     //PUT
     public Pedido update(Pedido pedido){
-        return pedidoRepository.actualizar(pedido);
+        if (pedidoRepository.findById(pedido.getId()).orElse(null) != null){
+            return pedidoRepository.save(pedido);
+        }
+        return null;
     }
 
     //DELETE
-    public void delete(Long id){
-        pedidoRepository.eliminar(id);
+    public void delete(String id){
+        pedidoRepository.deleteById(id);
     }
 }

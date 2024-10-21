@@ -1,10 +1,15 @@
 package com.upiiz.Practica1.Models;
 
+import jakarta.persistence.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+@Document(collection = "mensajes")
 public class Mensaje {
-    private Long id;
+    @Id
+    private String id;
     private LocalDateTime fecha;
     private LocalTime hora;
     private String contenido;
@@ -14,7 +19,7 @@ public class Mensaje {
     }
 
     // Constructor con todas las variables
-    public Mensaje(Long id, LocalDateTime fecha, LocalTime hora, String contenido) {
+    public Mensaje(String id, LocalDateTime fecha, LocalTime hora, String contenido) {
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
@@ -22,11 +27,11 @@ public class Mensaje {
     }
 
     // Getters and Setters
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

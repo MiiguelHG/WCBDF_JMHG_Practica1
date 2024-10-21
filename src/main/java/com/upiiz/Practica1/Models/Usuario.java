@@ -1,7 +1,12 @@
 package com.upiiz.Practica1.Models;
 
+import jakarta.persistence.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "usuarios")
 public class Usuario {
-    private Long id;
+    @Id
+    private String id;
     private String rol;
     private String clave;
     private String nombreCompleto;
@@ -14,7 +19,7 @@ public class Usuario {
     }
 
     // Constructor con todas las variables
-    public Usuario(Long id, String rol, String clave, String nombreCompleto, String email, String imagenPerfil, String tokenRestablecimiento) {
+    public Usuario(String id, String rol, String clave, String nombreCompleto, String email, String imagenPerfil, String tokenRestablecimiento) {
         this.id = id;
         this.rol = rol;
         this.clave = clave;
@@ -25,11 +30,11 @@ public class Usuario {
     }
 
     // Getters and Setters
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

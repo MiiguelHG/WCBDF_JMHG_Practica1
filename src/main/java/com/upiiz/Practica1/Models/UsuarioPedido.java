@@ -1,43 +1,52 @@
 package com.upiiz.Practica1.Models;
 
+import jakarta.persistence.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+
+@Document(collection = "usuariosPedidos")
 public class UsuarioPedido {
-    private Long id;
-    private Long usuarioId;
-    private Long pedidoId;
+    @Id
+    private String id;
+    @Field(targetType = FieldType.OBJECT_ID)
+    private String usuarioId;
+    @Field(targetType = FieldType.OBJECT_ID)
+    private String pedidoId;
 
     // Constructor vacío
     public UsuarioPedido() {
     }
 
     // Constructor con todas las variables
-    public UsuarioPedido(Long id, Long usuarioId, Long pedidoId) {
+    public UsuarioPedido(String id, String usuarioId, String pedidoId) {
         this.id = id;
         this.usuarioId = usuarioId;
         this.pedidoId = pedidoId;
     }
 
     // Getters and Setters
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getUsuarioId() {
+    public String getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(Long usuarioId) {
+    public void setUsuarioId(String usuarioId) {
         this.usuarioId = usuarioId;
     }
 
-    public Long getPedidoId() {
+    public String getPedidoId() {
         return pedidoId;
     }
 
-    public void setPedidoId(Long pedidoId) {
+    public void setPedidoId(String pedidoId) {
         this.pedidoId = pedidoId;
     }
 }

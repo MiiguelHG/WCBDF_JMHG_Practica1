@@ -25,7 +25,7 @@ public class MensajeController {
 
     //GET by Id
     @GetMapping("/{id}")
-    public ResponseEntity<Mensaje> getMensajeById(@PathVariable Long id){
+    public ResponseEntity<Mensaje> getMensajeById(@PathVariable String id){
         return ResponseEntity.ok(mensajeService.getMensajeById(id));
     }
 
@@ -38,14 +38,14 @@ public class MensajeController {
 
     //PUT
     @PutMapping("/{id}")
-    public  ResponseEntity<Mensaje> updateMensaje(@PathVariable Long id, @RequestBody Mensaje mensaje){
+    public  ResponseEntity<Mensaje> updateMensaje(@PathVariable String id, @RequestBody Mensaje mensaje){
         mensaje.setId(id);
         return ResponseEntity.ok(mensajeService.update(mensaje));
     }
 
     //DELETE
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMensaje(@PathVariable Long id){
+    public ResponseEntity<Void> deleteMensaje(@PathVariable String id){
         mensajeService.delete(id);
         return ResponseEntity.noContent().build();
     }

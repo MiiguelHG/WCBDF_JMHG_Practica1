@@ -25,7 +25,7 @@ public class PedidoController {
 
     //GET by Id
     @GetMapping("/{id}")
-    public ResponseEntity<Pedido> getPedidoById(@PathVariable Long id){
+    public ResponseEntity<Pedido> getPedidoById(@PathVariable String id){
         return ResponseEntity.ok(pedidoService.getPedidoById(id));
     }
 
@@ -38,14 +38,14 @@ public class PedidoController {
 
     //PUT
     @PutMapping("/{id}")
-    public ResponseEntity<Pedido> updatePedido(@PathVariable Long id, @RequestBody Pedido pedido){
+    public ResponseEntity<Pedido> updatePedido(@PathVariable String id, @RequestBody Pedido pedido){
         pedido.setId(id);
         return ResponseEntity.ok(pedidoService.update(pedido));
     }
 
     //DELETE
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePedido(@PathVariable Long id){
+    public ResponseEntity<Void> deletePedido(@PathVariable String id){
         pedidoService.delete(id);
         return ResponseEntity.noContent().build();
     }

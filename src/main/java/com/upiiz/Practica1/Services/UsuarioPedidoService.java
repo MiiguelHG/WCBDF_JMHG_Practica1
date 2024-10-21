@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class UsuarioPedidoService {
-    private UsuarioPedidoRepository usuarioPedidoRepository;
+    private final UsuarioPedidoRepository usuarioPedidoRepository;
 
     public UsuarioPedidoService(UsuarioPedidoRepository usuarioPedidoRepository){
         this.usuarioPedidoRepository = usuarioPedidoRepository;
@@ -16,22 +16,22 @@ public class UsuarioPedidoService {
 
     //GET
     public List<UsuarioPedido> getAllUsuariosPedidos (){
-        return usuarioPedidoRepository.getUsuariosPedidos();
+        return usuarioPedidoRepository.findAll();
     }
 
     //GET by Id
-    public UsuarioPedido getUsuarioPedidoById(Long id){
-        return usuarioPedidoRepository.getUsuarioPedidobyId(id);
+    public UsuarioPedido getUsuarioPedidoById(String id){
+        return usuarioPedidoRepository.findById(id).orElse(null);
     }
 
     //GET all UsuarioPedido by UsuarioId
-    public List<UsuarioPedido> getUsuarioPedidoByUsuarioId(Long usuario_id){
-        return usuarioPedidoRepository.getUsuarioPedidoByUsuarioId(usuario_id);
+    public List<UsuarioPedido> getUsuarioPedidoByUsuarioId(String usuario_id){
+        return usuarioPedidoRepository.findAllByUsuarioId(usuario_id);
     }
 
     //GET all UsuarioPedido by PedidoId
-    public List<UsuarioPedido> getUsuarioPedidoByPedidoId(Long pedido_id){
-        return usuarioPedidoRepository.getUsuarioPedidoByPedidoId(pedido_id);
+    public List<UsuarioPedido> getUsuarioPedidoByPedidoId(String pedido_id){
+        return usuarioPedidoRepository.findAllByPedidoId(pedido_id);
     }
 
     //POST
@@ -41,11 +41,14 @@ public class UsuarioPedidoService {
 
     //PUT
     public UsuarioPedido update(UsuarioPedido usuarioPedido){
-        return usuarioPedidoRepository.update(usuarioPedido);
+        if (usuarioPedidoRepository.findById(usuarioPedido.getId()).orElse(null) != null){
+            return usuarioPedidoRepository.save(usuarioPedido);
+        }
+        return null;
     }
 
     //DELETE
-    public void delete(Long id){
-        usuarioPedidoRepository.delete(id);
+    public void delete(String id){
+        usuarioPedidoRepository.deleteById(id);
     }
 }

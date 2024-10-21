@@ -1,9 +1,14 @@
 package com.upiiz.Practica1.Models;
 
+import jakarta.persistence.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDateTime;
 
+@Document(collection = "pedidos")
 public class Pedido {
-    private Long id;
+    @Id
+    private String id;
     private LocalDateTime fecha;
     private Double cantidadAPagar;
     private Double propina;
@@ -19,7 +24,7 @@ public class Pedido {
     }
 
     // Constructor con todas las variables
-    public Pedido(Long id, LocalDateTime fecha, Double cantidadAPagar, Double propina, Double total, Boolean pagado, String preferencias, String ubicacion, String folio, String estado) {
+    public Pedido(String id, LocalDateTime fecha, Double cantidadAPagar, Double propina, Double total, Boolean pagado, String preferencias, String ubicacion, String folio, String estado) {
         this.id = id;
         this.fecha = fecha;
         this.cantidadAPagar = cantidadAPagar;
@@ -33,11 +38,11 @@ public class Pedido {
     }
 
     // Getters and Setters
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

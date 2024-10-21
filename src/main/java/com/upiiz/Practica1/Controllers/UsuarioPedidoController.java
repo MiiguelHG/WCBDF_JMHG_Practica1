@@ -25,25 +25,25 @@ public class UsuarioPedidoController {
 
     //GET by Id
     @GetMapping("/usuariosPedidos/{id}")
-    public ResponseEntity<UsuarioPedido> getUsuarioPedidoById(@PathVariable Long id) {
+    public ResponseEntity<UsuarioPedido> getUsuarioPedidoById(@PathVariable String id) {
         return ResponseEntity.ok(usuarioPedidoService.getUsuarioPedidoById(id));
     }
 
     //GET all UsuarioPedido by UsuarioId
     @GetMapping("/usuarios/{usuario_id}/usuariosPedidos")
-    public ResponseEntity<List<UsuarioPedido>> getUsuarioPedidoByUsuarioId(@PathVariable Long usuario_id){
+    public ResponseEntity<List<UsuarioPedido>> getUsuarioPedidoByUsuarioId(@PathVariable String usuario_id){
         return ResponseEntity.ok(usuarioPedidoService.getUsuarioPedidoByUsuarioId(usuario_id));
     }
 
     //GET all UsuarioPedido by PedidoId
     @GetMapping("/pedidos/{pedido_id}/usuariosPedidos")
-    public ResponseEntity<List<UsuarioPedido>> getUsuarioPedidoByPedidoId(@PathVariable Long pedido_id){
+    public ResponseEntity<List<UsuarioPedido>> getUsuarioPedidoByPedidoId(@PathVariable String pedido_id){
         return ResponseEntity.ok(usuarioPedidoService.getUsuarioPedidoByPedidoId(pedido_id));
     }
 
     //POST
     @PostMapping("/usuarios/{usuario_id}/pedidos/{pedido_id}/usuariosPedidos")
-    public ResponseEntity<UsuarioPedido> saveUsuarioPedido(@PathVariable Long usuario_id, @PathVariable Long pedido_id){
+    public ResponseEntity<UsuarioPedido> saveUsuarioPedido(@PathVariable String usuario_id, @PathVariable String pedido_id){
         UsuarioPedido newUsuarioPedido = new UsuarioPedido();
         newUsuarioPedido.setUsuarioId(usuario_id);
         newUsuarioPedido.setPedidoId(pedido_id);
@@ -52,7 +52,7 @@ public class UsuarioPedidoController {
 
     //PUT by Id
     @PutMapping("/usuarios/{usuario_id}/pedidos/{pedido_id}/usuariosPedidos/{id}")
-    public ResponseEntity<UsuarioPedido> updateUsuarioPedido(@PathVariable Long id, @PathVariable Long usuario_id, @PathVariable Long pedido_id){
+    public ResponseEntity<UsuarioPedido> updateUsuarioPedido(@PathVariable String id, @PathVariable String usuario_id, @PathVariable String pedido_id){
         UsuarioPedido UpdateUsuarioPedido = new UsuarioPedido();
         UpdateUsuarioPedido.setId(id);
         UpdateUsuarioPedido.setUsuarioId(usuario_id);
@@ -62,7 +62,7 @@ public class UsuarioPedidoController {
 
     //DELETE by Id
     @DeleteMapping("/usuariosPedidos/{id}")
-    public ResponseEntity<Void> deleteUsuarioPedido(@PathVariable Long id){
+    public ResponseEntity<Void> deleteUsuarioPedido(@PathVariable String id){
         usuarioPedidoService.delete(id);
         return ResponseEntity.noContent().build();
     }

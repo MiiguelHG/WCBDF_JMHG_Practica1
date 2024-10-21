@@ -1,9 +1,18 @@
 package com.upiiz.Practica1.Models;
 
+import jakarta.persistence.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+
+@Document(collection = "pedidosProductos")
 public class PedidoProducto {
-    private Long id;
-    private Long pedidoId;
-    private Long productoId;
+    @Id
+    private String id;
+    @Field(targetType = FieldType.OBJECT_ID)
+    private String pedidoId;
+    @Field(targetType = FieldType.OBJECT_ID)
+    private String productoId;
     private Integer cantidad;
     private Double precio;
 
@@ -12,7 +21,7 @@ public class PedidoProducto {
     }
 
     // Constructor con todas las variables
-    public PedidoProducto(Long id, Long pedidoId, Long productoId, Integer cantidad, Double precio) {
+    public PedidoProducto(String id, String pedidoId, String productoId, Integer cantidad, Double precio) {
         this.id = id;
         this.pedidoId = pedidoId;
         this.productoId = productoId;
@@ -21,27 +30,27 @@ public class PedidoProducto {
     }
 
     // Getters and Setters
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getPedidoId() {
+    public String getPedidoId() {
         return pedidoId;
     }
 
-    public void setPedidoId(Long pedidoId) {
+    public void setPedidoId(String pedidoId) {
         this.pedidoId = pedidoId;
     }
 
-    public Long getProductoId() {
+    public String getProductoId() {
         return productoId;
     }
 
-    public void setProductoId(Long productoId) {
+    public void setProductoId(String productoId) {
         this.productoId = productoId;
     }
 

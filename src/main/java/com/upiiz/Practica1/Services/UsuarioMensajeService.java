@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class UsuarioMensajeService {
     //Requiero inyectar el repositorio
-    UsuarioMensajeRepository usuarioMensajeRepository;
+    private final UsuarioMensajeRepository usuarioMensajeRepository;
 
     //Constructor - Cuando crear la instanica le pasa el repositorio
     public UsuarioMensajeService(UsuarioMensajeRepository usuarioMensajeRepository){
@@ -18,22 +18,22 @@ public class UsuarioMensajeService {
 
     //GET
     public List<UsuarioMensaje> getAllUsuariosMensajes (){
-        return usuarioMensajeRepository.getUsuarioMensajes();
+        return usuarioMensajeRepository.findAll();
     }
 
     //GET by Id
-    public UsuarioMensaje getUsuarioMensajeById(Long id){
-        return usuarioMensajeRepository.getUsuarioMensajeById(id);
+    public UsuarioMensaje getUsuarioMensajeById(String id){
+        return usuarioMensajeRepository.findById(id).orElse(null);
     }
 
     //GET all mensajes by UsuarioId
-    public List<UsuarioMensaje> getUsuarioMensajeByUsuarioId(Long usuarioId){
-        return usuarioMensajeRepository.getUsuarioMensajeByUsuarioId(usuarioId);
+    public List<UsuarioMensaje> getUsuarioMensajeByUsuarioId(String usuarioId){
+        return usuarioMensajeRepository.findAllByUsuarioId(usuarioId);
     }
 
     //GET all mensajes by MensajeId
-    public List<UsuarioMensaje> getUsuarioMensajeByMensajeId(Long mensajeId){
-        return usuarioMensajeRepository.getUsuarioMensajeByMensajeId(mensajeId);
+    public List<UsuarioMensaje> getUsuarioMensajeByMensajeId(String mensajeId){
+        return usuarioMensajeRepository.findAllByMensajeId(mensajeId);
     }
 
     //POST
@@ -43,10 +43,13 @@ public class UsuarioMensajeService {
 
     //PUT
     public UsuarioMensaje update(UsuarioMensaje usuarioMensaje){
-        return usuarioMensajeRepository.update(usuarioMensaje);
+        if (usuarioMensajeRepository.findById(usuarioMensaje.getId()).orElse(null) != null){
+            return usuarioMensajeRepository.save(usuarioMensaje);
+        }
+        return null;
     }
     //DELETE
-    public void delete(Long id){
-        usuarioMensajeRepository.delete(id);
+    public void delete(String id){
+        usuarioMensajeRepository.deleteById(id);
     }
 }
